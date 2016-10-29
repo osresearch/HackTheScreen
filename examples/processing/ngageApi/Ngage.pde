@@ -14,7 +14,7 @@ class Ngage {
     OscProperties myProperties = new OscProperties();
     // increase the datagram size to 10000 bytes
     // by default it is set to 1536 bytes
-    myProperties.setDatagramSize(10000); 
+    myProperties.setDatagramSize(20000); 
     myProperties.setListeningPort(7004);
     
     
@@ -38,14 +38,14 @@ class Ngage {
       myIp = address.getHostAddress();
       println(myIp);
       ipList =  int(split(myIp, '.'));
-      myMessage.add(ipList[0]);
-      myMessage.add(ipList[1]);
-      myMessage.add(ipList[2]);
-      myMessage.add(ipList[3]);
-      //myMessage.add(192);
-      //myMessage.add(168);
-      //myMessage.add(7);
-      //myMessage.add(247);
+      //myMessage.add(ipList[0]);
+      //myMessage.add(ipList[1]);
+      //myMessage.add(ipList[2]);
+      //myMessage.add(ipList[3]);
+      myMessage.add(192);
+      myMessage.add(168);
+      myMessage.add(7);
+      myMessage.add(239);
       //oscP5.send(myMessage, hackTheScreenAPI);
       oscP5.send(myMessage);
     } 

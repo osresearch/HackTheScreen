@@ -5,20 +5,33 @@
  */
 
 Ngage mApi;
+Swarm swarm;
+Squares squares;
 
 void setup() {
-  size(1280, 640); //size of the screen
-  frameRate(25);
+  //size(1280, 640); //size of the screen
+  fullScreen(2);
+  frameRate(30);
   mApi = new Ngage();
+  swarm = new Swarm();
+  squares = new Squares();
 }
 
 void draw() {
   background(0);
+  squares.draw();
+
+  squares.intersect(new PVector(mouseX/(float) width, mouseY/(float) height));
 
   // Let's loop through all available blobs
   for (int i = 0; i < mApi.blobs.size(); i++) {
     Blob b = mApi.blobs.get(i);
+    if (!b.isAlive())
+	continue;
+
     drawBlob(b);
+    squares.intersect(b);
+	//swarm.wasp_move(new PVector(b.centerPos.x * 1280, b.centerPos.y * 640));
   }
   
   //Also check for available faces
@@ -26,6 +39,8 @@ void draw() {
    Face f = mApi.faces.get(i);
    drawFace(f);
   }
+
+  //swarm.draw();
 }
 
 void drawFace(Face f) {
@@ -43,7 +58,7 @@ void drawBlob(Blob b) {
   // draw rect based on Blob's detected size
   // dimensions from NgageAPI are 0-1, so we multiply by window width and height
   noFill();
-  stroke(255, 100);
+  stroke(255, 30);
   rect(b.boundingBox.x*width, b.boundingBox.y*height, b.boundingBox.width*width, b.boundingBox.height*height);    
 
   // draw circle based on Blob's centroid (also from 0-1)
