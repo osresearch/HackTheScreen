@@ -21,7 +21,7 @@ void draw() {
   background(0);
   squares.draw();
 
-  squares.intersect(new PVector(mouseX/(float) width, mouseY/(float) height));
+  squares.intersect(new PVector(mouseX, mouseY));
 
   // Let's loop through all available blobs
   for (int i = 0; i < mApi.blobs.size(); i++) {
@@ -31,7 +31,13 @@ void draw() {
 
     drawBlob(b);
     squares.intersect(b);
-	//swarm.wasp_move(new PVector(b.centerPos.x * 1280, b.centerPos.y * 640));
+    //swarm.wasp_move(new PVector(b.centerPos.x * 1280, b.centerPos.y * 640));
+  }
+
+  // now loop through all of the swarm bees
+  for(Particle b : swarm.bees)
+  {
+    squares.intersect(b.p);
   }
   
   //Also check for available faces
@@ -40,7 +46,7 @@ void draw() {
    drawFace(f);
   }
 
-  //swarm.draw();
+  swarm.draw();
 }
 
 void drawFace(Face f) {

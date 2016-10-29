@@ -61,11 +61,11 @@ class Square
 
 	void intersect(PVector p)
 	{
-		float dx = center.x - p.x * width;
-		float dy = center.y - p.y * height;
+		float dx = center.x - p.x;
+		float dy = center.y - p.y;
 		float dist = sqrt(dx*dx + dy*dy);
 
-		if (dist < w)
+		if (dist < w/2)
 			intersected = true;
 	}
 }

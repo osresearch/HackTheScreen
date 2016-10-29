@@ -9,8 +9,8 @@ class Particle
 	public PVector v = new PVector(0,0);
 
 	final static float dt = 1;
-	final static float max_a = 5;
-	final static float max_v = 29;
+	final static float max_a = 1.5;
+	final static float max_v = 30;
 	final static float max_wasp_v = 15;
 
 	void bee_move(PVector t)
@@ -41,19 +41,22 @@ class Particle
 		v.limit(max_wasp_v);
 
 		// nudge the wasp towards the center of the screen
-		if (p.x < width/2)
+		if (p.x < width/8)
 			v.x += random(2);
 		else
+		if (p.x > width*7/8)
 			v.x -= random(2);
 
-		if (p.y < height/2)
+		if (p.y < height/8)
 			v.y += random(2);
 		else
+		if (p.y > height*7/8)
 			v.y -= random(2);
 
-		if (p.z < height/2)
+		if (p.z < height/8)
 			v.z += random(2);
 		else
+		if (p.z > height*7/8)
 			v.z -= random(2);
 
 		p.add(v);
@@ -107,7 +110,6 @@ void draw() {
   if (mousePressed)
      wasp_follows_mouse = !wasp_follows_mouse;
 
-/*
   // update the wasp with the mouse
   if (wasp_follows_mouse)
   {
@@ -118,7 +120,6 @@ void draw() {
   } else {
     wasp.wasp_move();
   }
-*/
   
   wasp.draw(true);
 
